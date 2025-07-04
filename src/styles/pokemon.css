@@ -24,6 +24,21 @@
   box-shadow: 0 0 5px rgba(255, 83, 80, 0.2);
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
