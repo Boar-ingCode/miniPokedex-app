@@ -1,14 +1,16 @@
 // src/App.tsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
-import { TestPage } from './components/TestPage';
+import { PokemonList } from './components/pokemon/PokemonList';
+import { PokemonDetail } from './components/pokemon/PokemonDetail';
 
 function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<TestPage />} />
+          <Route path="/" element={<PokemonList />} />
+          <Route path="/pokemon/:id" element={<PokemonDetail />} />
         </Routes>
       </Layout>
     </Router>
