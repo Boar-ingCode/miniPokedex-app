@@ -4,6 +4,7 @@ import type { Pokemon } from '../../types/pokemon';
 import { PokemonCard } from './PokemoncCard';
 import { Loading } from '../common/Loading';
 import { ErrorMessage } from '../common/ErrorMessage';
+import '../../styles/pokemon.css'
 
 export const PokemonList = () => {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);

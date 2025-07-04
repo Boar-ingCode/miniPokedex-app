@@ -4,6 +4,7 @@ import { pokemonApi } from '../../api/pokemonApi';
 import type { Pokemon } from '../../types/pokemon';
 import { Loading } from '../common/Loading';
 import { ErrorMessage } from '../common/ErrorMessage';
+import '../../styles/pokemon.css'
 
 export const PokemonDetail = () => {
   const { id } = useParams<{ id: string }>();
