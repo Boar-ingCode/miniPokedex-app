@@ -3,17 +3,22 @@ import { pokemonApi } from '../../api/pokemonApi';
 import type { Pokemon } from '../../types/pokemon';
 import { PokemonCard } from './PokemonCard';
 import { Loading } from '../common/Loading';
-import { ErrorMessage } from '../common/ErrorMessage';
 
 export const PokemonList = () => {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState<string>('');
   const [searchResults, setSearchResults] = useState<Pokemon[]>([]);
   const observerTarget = useRef<HTMLDivElement>(null);
+
+  const pokemonTypes = [
+    'all', 'normal', 'fire', 'water', 'electric', 'grass', 'ice',
+    'fighting', 'poison', 'ground', 'flying', 'psychic', 'bug',
+    'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy'
+  ];
 
   const loadMorePokemon = async () => {
     try {
@@ -32,7 +37,7 @@ export const PokemonList = () => {
 
       setHasMore(response.next !== null);
     } catch (err) {
-      setError('Failed to load Pokemon');
+      console.error('Failed to load Pokemon');
     } finally {
       setLoading(false);
     }
@@ -69,11 +74,10 @@ export const PokemonList = () => {
 
     try {
       setLoading(true);
-      const response = await pokemonApi.getPokemons(11000, 0); 
+      const response = await pokemonApi.getPokemons(100000, 0);
       
       const matchingNames = response.results
-        .filter(p => p.name.toLowerCase().includes(term.toLowerCase()))
-        .slice(0, 20); 
+        .filter(p => p.name.toLowerCase().includes(term.toLowerCase()));
 
       const searchResults = await Promise.all(
         matchingNames.map(p => pokemonApi.getPokemonByName(p.name))
@@ -98,26 +102,62 @@ export const PokemonList = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
+    
+    if (value === '') {
+      setSearchResults([]);
+      setPokemon([]);
+      setOffset(0);
+      setHasMore(true);
+    }
+  };
+
+  const handleTypeSelect = (type: string) => {
+    const newType = type === 'all' ? '' : type;
+    
+    if (newType !== selectedType) {
+      setSelectedType(newType);
+      setPokemon([]);
+      setOffset(0);
+      setHasMore(true);
+    }
   };
 
   const displayedPokemon = searchTerm ? searchResults : pokemon;
 
-  if (error) return <ErrorMessage message={error} />;
+  const filteredPokemon = displayedPokemon.filter(p => {
+    const matchesType = !selectedType || selectedType === 'all' || 
+      p.types.some(t => t.type.name === selectedType);
+    return matchesType;
+  });
 
   return (
     <div className="pokemon-list-container">
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search Pokemon..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="search-input"
-        />
+      <div className="filters">
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search Pokemon..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="search-input"
+          />
+        </div>
+
+        <div className="type-filters">
+          {pokemonTypes.map(type => (
+            <button
+              key={type}
+              onClick={() => handleTypeSelect(type)}
+              className={`type-filter ${type} ${selectedType === (type === 'all' ? '' : type) ? 'active' : ''}`}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="pokemon-grid">
-        {displayedPokemon.map(p => (
+        {filteredPokemon.map(p => (
           <PokemonCard key={p.id} pokemon={p} />
         ))}
       </div>
