@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*.tsx"
+  [headers.values]
+    Content-Type = "text/javascript"
