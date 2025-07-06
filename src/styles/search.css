@@ -1,0 +1,26 @@
+.filters {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+}
+
+.search-bar {
+  margin: 20px auto;
+  max-width: 500px;
+  padding: 0 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ff5350;
+  box-shadow: 0 0 5px rgba(255, 83, 80, 0.2);
+}

@@ -1,13 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./src/assets/pokeball.png" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Pokédex - Complete Pokemon Database</title>
+    <meta name="title" content="Pokédex - Complete Pokemon Database" />
+    <meta name="description" content="Explore the complete Pokémon database with detailed information about abilities, types, stats, and more. Search and filter through all Pokemon generations." />
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="pokemon, pokedex, pokemon database, pokemon types, pokemon abilities, pokemon stats" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="[Dariusz Pazdur]" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ff5350" />
+
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Pokédex",
+        "description": "Complete Pokemon database with detailed information about abilities, types, stats, and more.",
+        "applicationCategory": "Database",
+        "operatingSystem": "Any",
+        "url": "[Your Website URL]"
+      }
+    </script>
   </body>
 </html>

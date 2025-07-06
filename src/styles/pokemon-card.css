@@ -1,0 +1,60 @@
+.pokemon-list-container {
+  padding: 20px;
+  width: 100%;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pokemon-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pokemon-card .pokemon-image {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+  object-fit: contain;
+}
+
+.pokemon-card .pokemon-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 10px 0;
+  color: #333;
+  text-align: center;
+}
+
+pokemon-types {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: center; /* This will center the types */
+  width: 100%; /* Ensure the container takes full width */
+}
+
+/* When there's only one type, ensure it's centered */
+.pokemon-types:has(:only-child) {
+  justify-content: center;
+}
