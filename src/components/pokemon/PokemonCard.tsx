@@ -1,6 +1,5 @@
 import type { Pokemon } from '../../types/pokemon';
 import { Link } from 'react-router-dom';
-import '../../styles/index.css'   
 
 interface PokemonCardProps {
   pokemon: Pokemon;
